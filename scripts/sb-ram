@@ -1,0 +1,4 @@
+#!/bin/sh
+# Description: Script to get ram usage
+
+printf " %s" "$(free -mh --si | grep '^Mem:' | awk '{print $3}')" && exit 0
