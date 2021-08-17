@@ -5,11 +5,13 @@ info="$(amixer get Master | grep '%' | head -n1)"
 percent="$(echo "$info" | sed -E 's/.*\[(.*)%\].*/\1/')"
 
 if echo "$info" | grep -q 'off'; then
-    VOLUME_ICON=''
-elif [ "$percent" -lt 50 ]; then
-    VOLUME_ICON=''
+    VOLUME_ICON=''
+elif [ "$percent" -lt 20 ]; then
+    VOLUME_ICON=''
+elif [ "$percent" -lt 60 ]; then
+    VOLUME_ICON=''
 else
-    VOLUME_ICON=''
+    VOLUME_ICON=''
 fi
 
 printf "%s %s%%" "$VOLUME_ICON" "$percent" && exit 0
