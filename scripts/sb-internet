@@ -1,8 +1,8 @@
 #!/bin/sh
 # Description: Script to get wifi and ethernet status
 
-SHOW_WNAME=false         # print wifi name
-SHOW_ENAME=false         # print ethernet name
+SHOW_WNAME=true         # print wifi name
+SHOW_ENAME=false        # print ethernet name
 
 info="$(nmcli dev | grep 'wifi')"
 echo "$info" | grep -wq 'connected' && WSYM='' || WSYM='' && $SHOW_WNAME && WNAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
@@ -10,5 +10,6 @@ echo "$info" | grep -wq 'connected' && WSYM='' || WSYM='' && $SHOW_WNAME &
 info="$(nmcli dev | grep 'ethernet')"
 echo "$info" | grep -wq 'connected' && ESYM='' && $SHOW_ENAME && ENAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
 
-printf "%s" "$WSYM" && $SHOW_WNAME && printf " %s" "$WNAME"
-[ -n "$ESYM" ] && printf " | %s" "$ESYM" && $SHOW_ENAME && printf " %s" "$ENAME"
+printf "^c#F26190^%s" "$WSYM" && $SHOW_WNAME && printf " %s" "$WNAME"
+[ -n "$ESYM" ] && printf " %s" "$ESYM" && $SHOW_ENAME && printf " %s" "$ENAME"
+printf "^d^" && exit 0

@@ -5,8 +5,14 @@ for battery in /sys/class/power_supply/BAT?; do
     percent=$(cat "$battery/capacity")  # battery percentage
     status="$(cat "$battery/status")"   # battery status
 
-    [ "$status" = "Charging" ] && CHARGE_ICON=""
-    [ "$percent" -gt 30 ] && BATTERY_ICON='' || BATTERY_ICON=''
+    [ "$status" = "Charging" ] && BATTERY_ICON="" || BATTERY_ICON=""
 
-    printf "%s%s %d%%" "$CHARGE_ICON" "$BATTERY_ICON" "$percent"
+    if [ "$percent" -gt 70 ]; then      # status2d
+        printf "^c#6CCB6E^"
+    elif [ "$percent" -gt 30 ]; then
+        printf "^c#F1FA8C^"
+    else
+        printf "^c#DB695B^"
+    fi
+    printf "%s %d%%^d^" "$BATTERY_ICON" "$percent"
 done && exit 0

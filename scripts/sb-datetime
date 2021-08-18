@@ -1,4 +1,4 @@
 #!/bin/sh
 # Description: Script to get current date and time
 
-printf " %s |  %s" "$(date '+%a, %d %b')" "$(date '+%H:%M')" && exit 0
+printf "^c#C269BC^ %s^d^" "$(date '+%a, %H:%M')" && exit 0

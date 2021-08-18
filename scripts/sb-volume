@@ -14,4 +14,4 @@ else
     VOLUME_ICON=''
 fi
 
-printf "%s %s%%" "$VOLUME_ICON" "$percent" && exit 0
+printf "^c#FF8537^%s %s%%^d^" "$VOLUME_ICON" "$percent" && exit 0
