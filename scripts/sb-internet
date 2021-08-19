@@ -1,15 +1,17 @@
 #!/bin/sh
 # Description: Script to get wifi and ethernet status
 
-SHOW_WNAME=true         # print wifi name
-SHOW_ENAME=false        # print ethernet name
+SHOW_WNAME=false
+SHOW_ENAME=false
 
 info="$(nmcli dev | grep 'wifi')"
-echo "$info" | grep -wq 'connected' && WSYM='' || WSYM='' && $SHOW_WNAME && WNAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
+echo "$info" | grep -wq 'connected' && WSYM='' || WSYM=''
+$SHOW_WNAME && WNAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
 
 info="$(nmcli dev | grep 'ethernet')"
-echo "$info" | grep -wq 'connected' && ESYM='' && $SHOW_ENAME && ENAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
+echo "$info" | grep -wq 'connected' && ESYM='' || ESYM=''
+$SHOW_ENAME && ENAME="$(echo "$info" | awk '$1=$2=$3=""; FNR == 1 {print $0};' | sed 's/^ *//g')"
 
 printf "^c#F26190^%s" "$WSYM" && $SHOW_WNAME && printf " %s" "$WNAME"
-[ -n "$ESYM" ] && printf " %s" "$ESYM" && $SHOW_ENAME && printf " %s" "$ENAME"
+[ -n "$ESYM" ] && printf " ^c#F692B2^%s" "$ESYM" && $SHOW_ENAME && printf " %s" "$ENAME"
 printf "^d^" && exit 0

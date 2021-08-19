@@ -8,9 +8,9 @@ for battery in /sys/class/power_supply/BAT?; do
     [ "$status" = "Charging" ] && BATTERY_ICON="" || BATTERY_ICON=""
 
     if [ "$percent" -gt 70 ]; then      # status2d
-        printf "^c#6CCB6E^"
+        printf "^c#B9CC81^"
     elif [ "$percent" -gt 30 ]; then
-        printf "^c#F1FA8C^"
+        printf "^c#F5BF03^"
     else
         printf "^c#DB695B^"
     fi
