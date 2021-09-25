@@ -1,18 +1,37 @@
 #!/bin/sh
 # Description: Script to get battery status
 
+source sb-status2d
+
 for battery in /sys/class/power_supply/BAT?; do
     percent=$(cat "$battery/capacity")  # battery percentage
     status="$(cat "$battery/status")"   # battery status
 
-    [ "$status" = "Charging" ] && BATTERY_ICON="" || BATTERY_ICON=""
+    [ "$status" = "Charging" ] && icon_charge=" "
 
-    if [ "$percent" -gt 70 ]; then      # status2d
-        printf "^c#B9CC81^"
-    elif [ "$percent" -gt 30 ]; then
-        printf "^c#F5BF03^"
+    if  [ "$percent" -eq 100 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 90 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 80 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 70 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 60 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 50 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 40 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 30 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 20 ]; then
+        icon_battery=""
+    elif [ "$percent" -ge 10 ]; then
+        icon_battery=""
     else
-        printf "^c#DB695B^"
+        icon_battery=""
     fi
-    printf "%s %d%%^d^" "$BATTERY_ICON" "$percent"
+
+    printf "%s%s%s %d%%%s" "$s2d_color2" "$icon_charge" "$icon_battery" "$percent" "$s2d_reset"
 done && exit 0

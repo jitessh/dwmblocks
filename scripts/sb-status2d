@@ -1,0 +1,25 @@
+#!/bin/sh
+# Description: Metadata for status2d stuff
+
+# enable/disable status2d output in other scripts
+enable_status2d=true
+$enable_status2d || return 0
+
+# status2d colors
+s2d_reset="^d^"
+s2d_color0="^c#1A1B26^"
+s2d_color8="^c#4E5173^"
+s2d_color1="^c#F7768E^"
+s2d_color9="^c#F7768E^"
+s2d_color2="^c#9ECE6A^"
+s2d_color10="^c#9ECE6A^"
+s2d_color3="^c#E0AF68^"
+s2d_color11="^c#E0AF68^"
+s2d_color4="^c#7AA2F7^"
+s2d_color12="^c#7AA2F7^"
+s2d_color5="^c#9A7ECC^"
+s2d_color13="^c#9A7ECC^"
+s2d_color6="^c#4ABAAF^"
+s2d_color14="^c#4ABAAF^"
+s2d_color7="^c#ACB0D0^"
+s2d_color15="^c#ACB0D0^"
